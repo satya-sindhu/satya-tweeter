@@ -47,7 +47,11 @@
       $('#post-tweet').submit(function(event){
       event.preventDefault()
       const text = $('#tweet-text').val()
-      console.log(text);
+
+      // Form validation to ensure tweet text exists and doesn't exceed character limit
+      if (text === null || text === "") {
+      alert("Please enter a tweet. We want to hear you hum.");
+    } else {
       $.ajax({
         url : '/tweets',         
         type : 'POST',         
@@ -56,7 +60,16 @@
            loadTweet()      
            }   
             });
+      
+    }
+      
       }) 
+
+      
+
+    // $.post('/tweets', serializedData)
+
+  // })
 
       //For each tweet object, render and prepend tweet element
       
@@ -71,16 +84,22 @@
       //This methods takes string URL and sends "GET" request to load all data and renders them.
 
       const loadTweet = function() {
+        console.log("hi");
         $.ajax({        
           url : '/tweets',         
           type : 'GET',
         })                             
           .then(function(results){             
-            renderTweets(results)       
-             
-            });
-      }
+            renderTweets(results); 
+            console.log(results);      
+           });
+            
+             }
+             //Call to load past tweets onto page
       loadTweet();
+            
+
+      
 
     
        //Create dynamic tweet element using DB
@@ -110,6 +129,6 @@
       return $tweet
       }
       // renderTweets(data);
-    });
+    })
     
       
