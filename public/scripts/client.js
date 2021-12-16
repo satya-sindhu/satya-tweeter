@@ -59,6 +59,7 @@
       }) 
 
       //For each tweet object, render and prepend tweet element
+      
       const renderTweets = function(tweets) {         
         for (const tweet of tweets) {
           console.log(tweet)
@@ -67,19 +68,23 @@
         }
       }
 
-      //Function to request and load array of tweets
+      //This methods takes string URL and sends "GET" request to load all data and renders them.
+
       const loadTweet = function() {
         $.ajax({        
           url : '/tweets',         
-          type : 'GET',         
-          success : function(results){             
+          type : 'GET',
+        })                             
+          .then(function(results){             
             renderTweets(results)       
-           }     
+             
             });
       }
+      loadTweet();
 
     
        //Create dynamic tweet element using DB
+
       const createTweetElement = function(tweets) {
         console.log(tweets);
         let $tweet = $(`<article class="tweet">
