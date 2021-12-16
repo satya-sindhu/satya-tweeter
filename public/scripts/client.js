@@ -5,43 +5,12 @@
  */
      $(document).ready(function() {
 
-
-    //   const tweetData = {
-    //     "user": {
-    //       "name": "Newton",
-    //       "avatars": "https://i.imgur.com/73hZDYK.png",
-    //         "handle": "@SirIsaac"
-    //       },
-    //     "content": {
-    //         "text": "If I have seen further it is by standing on the shoulders of giants"
-    //       },
-    //     "created_at": 1461116232227
-    //  }
-    
-    //   const data = [
-    //     {
-    //       "user": {
-    //         "name": "Newton",
-    //         "avatars": "https://i.imgur.com/73hZDYK.png"
-    //         ,
-    //         "handle": "@SirIsaac"
-    //       },
-    //       "content": {
-    //         "text": "If I have seen further it is by standing on the shoulders of giants"
-    //       },
-    //       "created_at": 1461116232227
-    //     },
-    //     {
-    //       "user": {
-    //         "name": "Descartes",
-    //         "avatars": "https://i.imgur.com/nlhLi3I.png",
-    //         "handle": "@rd" },
-    //       "content": {
-    //         "text": "Je pense , donc je suis"
-    //       },
-    //       "created_at": 1461113959088
-    //     }
-    //   ]
+      //Use escape function to prevent vulnerabilities from XSS
+  const escape = function (str) {
+    let div = document.createElement("div");
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  };
 
       //Event handler for new tweets
       $('#post-tweet').submit(function(event){
@@ -105,7 +74,7 @@
        //Create dynamic tweet element using DB
 
       const createTweetElement = function(tweets) {
-        console.log(tweets);
+        // console.log(tweets);
         let $tweet = $(`<article class="tweet">
         <header >
           <div class="imgandname"> 
@@ -114,7 +83,7 @@
           </div>
           <span class="userhandle">${tweets.user.handle}</span>
         </header>
-        <h3>${tweets.content.text}</h3>
+        <h3>${escape(tweets.content.text)}</h3>
         <footer>
           <h5>${timeago.format(tweets.created_at)} </h5>
           <div class="icons">
