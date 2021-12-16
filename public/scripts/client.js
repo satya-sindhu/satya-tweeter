@@ -6,42 +6,57 @@
      $(document).ready(function() {
 
 
-      const tweetData = {
-        "user": {
-          "name": "Newton",
-          "avatars": "https://i.imgur.com/73hZDYK.png",
-            "handle": "@SirIsaac"
-          },
-        "content": {
-            "text": "If I have seen further it is by standing on the shoulders of giants"
-          },
-        "created_at": 1461116232227
-     }
+    //   const tweetData = {
+    //     "user": {
+    //       "name": "Newton",
+    //       "avatars": "https://i.imgur.com/73hZDYK.png",
+    //         "handle": "@SirIsaac"
+    //       },
+    //     "content": {
+    //         "text": "If I have seen further it is by standing on the shoulders of giants"
+    //       },
+    //     "created_at": 1461116232227
+    //  }
     
-      const data = [
-        {
-          "user": {
-            "name": "Newton",
-            "avatars": "https://i.imgur.com/73hZDYK.png"
-            ,
-            "handle": "@SirIsaac"
-          },
-          "content": {
-            "text": "If I have seen further it is by standing on the shoulders of giants"
-          },
-          "created_at": 1461116232227
-        },
-        {
-          "user": {
-            "name": "Descartes",
-            "avatars": "https://i.imgur.com/nlhLi3I.png",
-            "handle": "@rd" },
-          "content": {
-            "text": "Je pense , donc je suis"
-          },
-          "created_at": 1461113959088
-        }
-      ]
+    //   const data = [
+    //     {
+    //       "user": {
+    //         "name": "Newton",
+    //         "avatars": "https://i.imgur.com/73hZDYK.png"
+    //         ,
+    //         "handle": "@SirIsaac"
+    //       },
+    //       "content": {
+    //         "text": "If I have seen further it is by standing on the shoulders of giants"
+    //       },
+    //       "created_at": 1461116232227
+    //     },
+    //     {
+    //       "user": {
+    //         "name": "Descartes",
+    //         "avatars": "https://i.imgur.com/nlhLi3I.png",
+    //         "handle": "@rd" },
+    //       "content": {
+    //         "text": "Je pense , donc je suis"
+    //       },
+    //       "created_at": 1461113959088
+    //     }
+    //   ]
+
+      //Event handler for new tweets
+      $('#post-tweet').submit(function(event){
+      event.preventDefault()
+      const text = $('#tweet-text').val()
+      console.log(text);
+      $.ajax({
+        url : '/tweets',         
+        type : 'POST',         
+        data : $(this).serialize(),       
+         success : function(result){             
+           loadTweet()      
+           }   
+            });
+      }) 
 
       //For each tweet object, render and prepend tweet element
       const renderTweets = function(tweets) {         
@@ -51,20 +66,33 @@
           $('#tweet-container').prepend(newTweet);
         }
       }
+
+      //Function to request and load array of tweets
+      const loadTweet = function() {
+        $.ajax({        
+          url : '/tweets',         
+          type : 'GET',         
+          success : function(results){             
+            renderTweets(results)       
+           }     
+            });
+      }
+
+    
        //Create dynamic tweet element using DB
       const createTweetElement = function(tweets) {
         console.log(tweets);
         let $tweet = $(`<article class="tweet">
         <header >
           <div class="imgandname"> 
-            <img src="${tweetData.user.avatars}"/>
-            <span class="username">${tweetData.user.name}</span>
+            <img src="${tweets.user.avatars}"/>
+            <span class="username">${tweets.user.name}</span>
           </div>
-          <span class="userhandle">${tweetData.user.handle}</span>
+          <span class="userhandle">${tweets.user.handle}</span>
         </header>
-        <h3>${tweetData.content.text}</h3>
+        <h3>${tweets.content.text}</h3>
         <footer>
-          <h5>${timeago.format(tweetData.created_at)} </h5>
+          <h5>${timeago.format(tweets.created_at)} </h5>
           <div class="icons">
             <i class="fas fa-flag"></i>
             <i class="fas fa-retweet"></i>
@@ -76,8 +104,7 @@
       // return tweetElement;
       return $tweet
       }
-      renderTweets(data);
+      // renderTweets(data);
     });
     
-
       
