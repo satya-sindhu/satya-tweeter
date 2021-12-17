@@ -5,6 +5,8 @@
  */
      $(document).ready(function() {
 
+      const loadTweetsURL = "http://localhost:8080/tweets";
+
       //Use escape function to prevent vulnerabilities from XSS
   const escape = function (str) {
     let div = document.createElement("div");
@@ -16,22 +18,36 @@
       $('#post-tweet').submit(function(event){
       event.preventDefault()
       const text = $('#tweet-text').val()
-
+      console.log(text);
       // Form validation to ensure tweet text exists and doesn't exceed character limit
       if (text === null || text === "") {
-      alert("Please enter a tweet. We want to hear you hum.");
-    } else {
+        $("#tweet-input").prepend(createErrorElement("Please enter a tweet. We want to hear you hum."));
+        $("#error-message").slideDown(1000);
+        return;
+    } 
+    if (text.length > 140) {
+      $("#tweet-input").prepend(createErrorElement("Tweet is too long. Please reduce no of chars to 140."));
+      $("#error-message").slideDown(1000);
+      return; 
+    } 
       $.ajax({
         url : '/tweets',         
         type : 'POST',         
         data : $(this).serialize(),       
-         success : function(result){             
-           loadTweet()      
+         success : function(result){       
+          if (!error && !data) {
+            $.post(url, $("#tweet-text").serialize()).then(onSuccess);
+            $("#tweet-text").val("");
+            $("#counter").val(140);
+          } else {
+            $("#tweet-text").val("");
+            $("#counter").val(140);
+            $("#tweet-input").prepend(createErrorElement(error));
+            $("#error-message").slideDown(1000);
+          }      
+           loadTweet(loadTweetsURL);      
            }   
             });
-      
-    }
-      
       }) 
 
       
@@ -66,10 +82,30 @@
              }
              //Call to load past tweets onto page
       loadTweet();
-            
 
-      
+      // This method takes error and renders that into a div element to display.
+    const createErrorElement = function(data) {
+      const errorElement = `
+      <div class="error-message" id="error-message">
+      <span class="error-text"> ${data}</span>
+      </div>`;
+  
+      return errorElement;
+    };
 
+    // This method takes String tweet and validates and returns object based on that.
+    const validateForm = function(tweet) {
+      if (!tweet) {
+        return { error: "Please enter valid tweet.", data: null };
+      }
+      if (tweet && tweet.length > 140) {
+        return {
+          error: "Tweet is too long. Please reduce no of chars to 140.",
+          data: null,
+        };
+      }
+      return { error: null, data: null };
+    };
     
        //Create dynamic tweet element using DB
 
@@ -99,5 +135,7 @@
       }
       // renderTweets(data);
     })
+
     
+  
       
