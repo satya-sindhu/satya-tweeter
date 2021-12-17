@@ -1,5 +1,4 @@
 #tweet-container {
-    border: 2px solid black;
     margin-top: 1.5em;
     display: flex;
     flex-direction: column;
@@ -41,4 +40,15 @@
 
 #tweet-container.current-tweet footer .icons i:hover {
     color:#4056A1;
+}
+
+.tweet {
+    border: 2px solid black;
+    padding: 1.5em;
+    margin-bottom: 2em;
+    
+}
+
+.username {
+    margin: auto;
 }
