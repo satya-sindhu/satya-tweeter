@@ -1,54 +1,53 @@
 #tweet-container {
-    margin-top: 1.5em;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 15px;
+  margin-top: 1.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px;
 }
 
 #tweet-container header {
- display: flex;
- justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .imgandname {
-    display: flex;
+  display: flex;
 }
 
 .imgandname h5 {
-    margin-left: 15px;
+  margin-left: 15px;
 }
 
 .imgandname img {
-    padding: 0.6em;
+  padding: 0.6em;
 }
 
 #tweet-container footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    border-top: 2px solid black;
-   }
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 2px solid black;
+}
 
 #tweet-container footer .icons i {
-  color: #4056A1;
-   }
+  color: #4056a1;
+}
 
- #tweet-container footer .icons i:hover {
-    color: orange;
+#tweet-container footer .icons i:hover {
+  color: orange;
 }
 
 #tweet-container.current-tweet footer .icons i:hover {
-    color:#4056A1;
+  color: #4056a1;
 }
 
 .tweet {
-    border: 2px solid black;
-    padding: 1.5em;
-    margin-bottom: 2em;
-    
+  border: 2px solid black;
+  padding: 1.5em;
+  margin-bottom: 2em;
 }
 
 .username {
-    margin: auto;
+  margin: auto;
 }

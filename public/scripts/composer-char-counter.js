@@ -1,9 +1,11 @@
-$(document).ready(function() {
-    const maxchars = 140;
+
+//To count number of characters
+$(document).ready(function () {
+  const maxchars = 140;
   const $tweetText = $("#tweet-text");
-  $tweetText.keyup(function() {
+  $tweetText.keyup(function () {
     const $counter = $(this).closest(".new-tweet").find(".counter");
-    const $curval =  $(this).val().length;
+    const $curval = $(this).val().length;
     $counter.text(maxchars - $curval);
     if ($counter.val() < 0) {
       $counter.addClass('over-limit');
