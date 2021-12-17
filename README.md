@@ -19,6 +19,9 @@ This repository is the starter code for the project: Students will fork and clon
 
 ## Final Product
 
-!["screenshot Character Count Error"] (https://github.com/satya-sindhu/satya-tweeter/blob/master/DOCS/Character%20Count%20Error.JPG)
-!["screenshot Tweeter_with_tweet"] (https://github.com/satya-sindhu/satya-tweeter/blob/master/DOCS/Tweeter_with_tweet.JPG) 
-!["screenshot empty tweet error"] (https://github.com/satya-sindhu/satya-tweeter/blob/master/DOCS/empty%20tweet%20error.JPG)
+
+!["screenshot Character Count Error "](https://github.com/satya-sindhu/satya-tweeter/blob/master/DOCS/Character%20Count%20Error.JPG)
+
+!["screenshot Tweeter_with_tweet "](https://github.com/satya-sindhu/satya-tweeter/blob/master/DOCS/Tweeter_with_tweet.JPG)
+
+!["screenshot empty tweet error"](https://github.com/satya-sindhu/satya-tweeter/blob/master/DOCS/empty%20tweet%20error.JPG)
