@@ -8,6 +8,7 @@ $(document).ready(function () {
   const loadTweetsURL = "http://localhost:8080/tweets";
 
   //Use escape function to prevent vulnerabilities from XSS
+
   const escape = function (str) {
     let div = document.createElement("div");
     div.appendChild(document.createTextNode(str));
@@ -21,6 +22,7 @@ $(document).ready(function () {
     console.log(text);
 
     // Form validation to ensure tweet text exists and doesn't exceed character limit
+
     if (text === null || text === "") {
       $("#tweet-input").prepend(createErrorElement("Please enter a tweet. We want to hear you hum."));
       $("#error-message").slideDown(1000).hide(3500);
@@ -47,8 +49,8 @@ $(document).ready(function () {
   //For each tweet object, render and prepend tweet element
 
   const renderTweets = function (tweets) {
+    $('#tweet-container').empty();
     for (const tweet of tweets) {
-      console.log(tweet)
       const newTweet = createTweetElement(tweet);
       $('#tweet-container').prepend(newTweet);
     }
@@ -57,7 +59,6 @@ $(document).ready(function () {
   //This methods takes string URL and sends "GET" request to load all data and renders them.
 
   const loadTweet = function () {
-    console.log("hi");
     $.ajax({
       url: '/tweets',
       type: 'GET',
@@ -73,6 +74,7 @@ $(document).ready(function () {
   loadTweet();
 
   // This method takes error and renders that into a div element to display.
+
   const createErrorElement = function (data) {
     const errorElement = `
       <div class="error-message" id="error-message">
